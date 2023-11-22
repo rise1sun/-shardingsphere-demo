@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date $DATE
  */
 @SpringBootApplication
-@MapperScan(value = "com.feng.mapper.**")
+@MapperScan(basePackages = "com.feng.mapper")
 public class WMSApplication {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         SpringApplication.run(WMSApplication.class,args);
     }
 }
