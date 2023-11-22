@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.mapper.BarcodeMapper">
+
+    <sql id="FIELDS">
+        id, barcode
+    </sql>
+    <update id="updateDataSource">
+        update barcodes set data_source =#{dataSource}
+                        WHERE create_time >'2023-11-22 11:40:57'
+    </update>
+
+    <select id="selectById" parameterType="Integer" resultType="BarcodeDO">
+        SELECT
+        <include refid="FIELDS" />
+        FROM barcodes
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectListByBarcode" parameterType="Integer" resultType="BarcodeDO">
+        SELECT
+        <include refid="FIELDS" />
+        FROM barcodes
+        WHERE barcode = #{barcode}
+    </select>
+    <select id="selectListByTime" resultType="com.feng.entity.BarcodeDO">
+        SELECT
+        <include refid="FIELDS" />
+        FROM barcodes
+        WHERE create_time >'2023-11-22 11:40:57'
+    </select>
+
+    <insert id="insert" parameterType="BarcodeDO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO barcodes (
+            barcode,
+            spec,
+            area,
+            storage,
+            barcode_status,
+            mes_production_number,
+            customer_number,
+            create_time,
+            update_time
+        ) VALUES (
+                     #{barcode},#{spec},#{area},#{storage},#{barcodeStatus},#{mesProductionNumber}
+                     ,#{customerNumber},#{createTime},#{updateTime}
+                 )
+    </insert>
+
+</mapper>
